@@ -53,20 +53,29 @@ namespace Calculator
         {
             if (!isError)
             {
-                Button button = (Button)sender;
-                if (resultValue != 0)
+                if (Entry.Text != "")
                 {
+                    if (Entry.Text.Last() != '/' && Entry.Text.Last() != '*' && Entry.Text.Last() != '+' && Entry.Text.Last() != '-' && Entry.Text.Last() != '.')
+                    {
+                        if (Entry.Text != "")
+                        {
+                            Button button = (Button)sender;
+                            if (resultValue != 0)
+                            {
 
-                    operation = button.Content.ToString();
-                    Entry.Text = resultValue + " " + operation;
-                    isOperation = true;
-                }
-                else
-                {
-                    operation = button.Content.ToString();
-                    resultValue = Double.Parse(Entry.Text,CultureInfo.InvariantCulture);
-                    Entry.Text = resultValue + " " + operation;
-                    isOperation = true;
+                                operation = button.Content.ToString();
+                                Entry.Text = resultValue + " " + operation;
+                                isOperation = true;
+                            }
+                            else
+                            {
+                                operation = button.Content.ToString();
+                                resultValue = Double.Parse(Entry.Text, CultureInfo.InvariantCulture);
+                                Entry.Text = resultValue + " " + operation;
+                                isOperation = true;
+                            }
+                        }
+                    }
                 }
             }
          
@@ -75,32 +84,39 @@ namespace Calculator
         {
             if (!isError)
             {
-
-                switch (operation)
+                if (Entry.Text.Last() != '/' && Entry.Text.Last() != '*' && Entry.Text.Last() != '+' && Entry.Text.Last() != '-' && Entry.Text.Last() != '.')
                 {
-                    case "+":
-                        Entry.Text = (resultValue + Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
-                        break;
-                    case "-":
-                        Entry.Text = (resultValue - Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
-                        break;
-                    case "*":
-                        Entry.Text = (resultValue * Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
-                        break;
-                    case "/":
-                        if (Double.Parse(Entry.Text, CultureInfo.InvariantCulture) == 0) { Entry.Text = "NIEDOZWOLONE"; isError = true; break; }
-                        else
+                    switch (operation)
+                    {
+
+                        case "+":
+                            Entry.Text = (resultValue + Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
+                            break;
+                        case "-":
+                            Entry.Text = (resultValue - Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
+                            break;
+                        case "*":
+                            Entry.Text = (resultValue * Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
+                            break;
+                        case "/":
+                            if (Double.Parse(Entry.Text, CultureInfo.InvariantCulture) == 0) { Entry.Text = "NIEDOZWOLONE"; isError = true; break; }//
+                            else
+                            {
+                                Entry.Text = (resultValue / Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (!isError)
+                    {
+                        if (Entry.Text != "")
                         {
-                            Entry.Text = (resultValue / Double.Parse(Entry.Text, CultureInfo.InvariantCulture)).ToString(CultureInfo.InvariantCulture);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                if (!isError)
-                {
-                    resultValue = Double.Parse(Entry.Text, CultureInfo.InvariantCulture);
+                            resultValue = Double.Parse(Entry.Text, CultureInfo.InvariantCulture);
+                        } //
+                    }
                 }
             }
            
@@ -109,9 +125,12 @@ namespace Calculator
         {
             if (!isError)
             {
-                Button button = (Button)sender;
-                if (!Entry.Text.Contains("."))
-                { Entry.Text = Entry.Text + button.Content; }
+                if (Entry.Text != "")
+                {
+                    Button button = (Button)sender;
+                    if (!Entry.Text.Contains("."))
+                    { Entry.Text = Entry.Text + button.Content; }
+                }
 
             }
         }

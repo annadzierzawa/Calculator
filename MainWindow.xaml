@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="650" Width="400">
+        Title="Calculator" Height="650" Width="400" ResizeMode="NoResize">
     
     <Grid Name="FirstGrid" Background="BlueViolet" AutomationProperties.Name="labelCurrentOperation" >
         <Grid.ColumnDefinitions>
